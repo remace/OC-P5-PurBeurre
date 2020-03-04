@@ -1,0 +1,54 @@
+<FirstScreen>:
+    BoxLayout:
+        orientation:'vertical'
+        Label:
+            text: 'Base de données à mettre à jour'
+            size_hint_y: 0.4
+        Button:
+            text:'mettre à jour la base de données'
+            size_hint_y:0.2
+            on_press: root.update_db()
+        Button:
+            text:"rechercher un produit alternatif à partir d'un produit existant"
+            size_hint_y:0.2
+            on_press: root.manager.current='categories'
+        Button:
+            text:"visualiser l'historique"
+            size_hint_y:0.2
+            on_press: root.manager.current='favourites'
+
+<CategoriesScreen>:
+    BoxLayout:
+        orientation:'vertical'
+        Label:
+            text:'Screen categories'
+        Button:
+            text: "retour à l'accueil"
+            on_press:root.manager.current='accueil'
+
+<CategoriesButton>:
+    text: root.name
+    on_press: root.manager.current='accueil'
+
+<FoodsScreen>:
+    BoxLayout:
+        orientation:'vertical'
+        Label:
+            text:'Screen foods'
+        Button:
+            text: "retour à l'accueil"
+            on_press:root.manager.current='accueil'
+<ItemScreen>:
+    Label:
+        text: 'Screen Item'
+    Button:
+        text: "retour à l'accueil"
+        on_press:root.manager.current='accueil'
+<FavouritesScreen>:
+    BoxLayout:
+        orientation:'vertical'
+        Label:
+            text: 'favourites screen'
+        Button:
+            text: "retour à l'accueil"
+            on_press:root.manager.current='accueil'
