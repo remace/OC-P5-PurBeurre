@@ -1,15 +1,18 @@
+# -*- coding: utf-8 -*-
 <FirstScreen>:
     BoxLayout:
         orientation:'vertical'
         Label:
-            text: 'Base de donn√©es √† mettre √† jour'
+            id: 'db_state_label'
+            text: root.db_state_text
             size_hint_y: 0.4
         Button:
-            text:'mettre √† jour la base de donn√©es'
+            id: 'db_update_button'
+            text:'mettre ‡ jour la base de donnÈes'
             size_hint_y:0.2
-            on_press: root.update_db()
+            on_press: root.async_update_db()
         Button:
-            text:"rechercher un produit alternatif √† partir d'un produit existant"
+            text:"rechercher un produit alternatif ‡ partir d'un produit existant"
             size_hint_y:0.2
             on_press: root.manager.current='categories'
         Button:
@@ -17,18 +20,30 @@
             size_hint_y:0.2
             on_press: root.manager.current='favourites'
 
-<CategoriesScreen>:
-    BoxLayout:
-        orientation:'vertical'
-        Label:
-            text:'Screen categories'
-        Button:
-            text: "retour √† l'accueil"
-            on_press:root.manager.current='accueil'
 
-<CategoriesButton>:
-    text: root.name
-    on_press: root.manager.current='accueil'
+ScrollView:
+#<ProductList>:
+    do_scroll_x: True
+    do_scroll_y: True
+
+#<CategoriesScreenBoxLayout>:
+#    BoxLayout:
+#        CategoriesScreenStackLayout:
+#            orientation:'lr-tb'
+
+    Button:
+        text: "retour ‡ l'accueil"
+        on_press:root.manager.current='accueil'
+
+<CategoryButton>:
+    text: root.text
+    on_press:
+        root.click(self)
+        root.parent.parent.parent.parent.manager.current='foods'
+
+<foodsButton>:
+    text: root.text
+    on_press: root.click(self)
 
 <FoodsScreen>:
     BoxLayout:
@@ -36,19 +51,23 @@
         Label:
             text:'Screen foods'
         Button:
-            text: "retour √† l'accueil"
+            text: "retour ‡ l'accueil"
             on_press:root.manager.current='accueil'
+
+
 <ItemScreen>:
     Label:
         text: 'Screen Item'
     Button:
-        text: "retour √† l'accueil"
+        text: "retour ‡ l'accueil"
         on_press:root.manager.current='accueil'
+
+
 <FavouritesScreen>:
     BoxLayout:
         orientation:'vertical'
         Label:
             text: 'favourites screen'
         Button:
-            text: "retour √† l'accueil"
+            text: "retour ‡ l'accueil"
             on_press:root.manager.current='accueil'

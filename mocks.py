@@ -1,17 +1,7 @@
-CATEGORIES = [
-    {
-        'name': 'frais',
-        id: 1
-    },
-    {
-        'name': 'surgelé',
-        'id': 2
-    },
-    {
-        'name': 'liquide',
-        'id': 3
-    }
-]
+CATEGORIES = [{
+    'id': i,
+    'text': 'sample_{}'.format(i)
+} for i in range(50)]
 
 FOODS = [
     {
