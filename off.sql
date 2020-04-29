@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`favourites` (
   CONSTRAINT `fk_food_int`
     FOREIGN KEY (`food_id`)
     REFERENCES `mydb`.`foods` (`food_id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`foods` (
   CONSTRAINT `category_id`
     FOREIGN KEY (`category_id`)
     REFERENCES `mydb`.`categories` (`category_id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 

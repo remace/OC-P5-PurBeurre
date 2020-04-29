@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 <FirstScreen>:
+    state_lbl : db_state_label
     BoxLayout:
         orientation:'vertical'
         Label:
-            id: 'db_state_label'
+            id: db_state_label
             text: root.db_state_text
             size_hint_y: 0.4
         Button:
@@ -14,60 +15,168 @@
         Button:
             text:"rechercher un produit alternatif à partir d'un produit existant"
             size_hint_y:0.2
-            on_press: root.manager.current='categories'
+            on_press:
+                root.manager.current='categories'
         Button:
             text:"visualiser l'historique"
             size_hint_y:0.2
             on_press: root.manager.current='favourites'
 
-
-ScrollView:
-#<ProductList>:
-    do_scroll_x: True
-    do_scroll_y: True
-
-#<CategoriesScreenBoxLayout>:
-#    BoxLayout:
-#        CategoriesScreenStackLayout:
-#            orientation:'lr-tb'
-
-    Button:
-        text: "retour à l'accueil"
-        on_press:root.manager.current='accueil'
-
-<CategoryButton>:
-    text: root.text
-    on_press:
-        root.click(self)
-        root.parent.parent.parent.parent.manager.current='foods'
-
-<foodsButton>:
-    text: root.text
-    on_press: root.click(self)
-
-<FoodsScreen>:
+<ItemView>:
+    name : item_name
+    ingredients : item_ingredients
+    additives : item_additives
+    nutriscore : item_nutriscore
+    nutrients : item_nutrients
+    labels : item_labels
+    stores : item_stores
+    barcode : item_barcode
+    url : item_url
+    favourite : favourite
     BoxLayout:
         orientation:'vertical'
-        Label:
-            text:'Screen foods'
-        Button:
-            text: "retour à l'accueil"
-            on_press:root.manager.current='accueil'
+        ActionBar:
+            ActionView:
+                ActionPrevious:
+                    title:"Pur Beurre"
+                    on_press:
+                        root.parent.manager.current="accueil"
+                ActionButton:
+                    text: "précédent"
+                    on_press:
+                        root.parent.manager.current="foods"
+        GridLayout:
+            cols:2
+            Label:
+                text: "produit: "
+            Label:
+                id: item_name
+                text: ""
+
+            Label:
+                text: "ingredients: "
+            Label:
+                id: item_ingredients
+                text: ""
+
+            Label:
+                text: "additives: "
+            Label:
+                id: item_additives
+                text: ""
+
+            Label:
+                text: "nutriscore:"
+            Label:
+                id: item_nutriscore
+                text: ""
+
+            Label:
+                text: "nutrients"
+            Label:
+                id: item_nutrients
+                text: ""
+
+            Label:
+                text: "labels: "
+            Label:
+                id: item_labels
+                text: ""
+
+            Label:
+                text: "magasins:"
+            Label:
+                id: item_stores
+                text: ""
+
+            Label:
+                text: "barcode"
+            Label:
+                id: item_barcode
+                text: ""
+
+            Button:
+                text: "URL vers openFoodFacts.fr"
+                id :item_url
+                on_press: root.click_link();
+
+            Button:
+                id : favourite
+                text : ""
+                on_press: root.click_favourite()
 
 
-<ItemScreen>:
+<FoodsListItem>:
+    name: item_name
+    details_btn: details_btn
+    fav_btn: favourite_btn
+    size: root.size
+    orientation: 'horizontal'
+    width :
     Label:
-        text: 'Screen Item'
+        id: item_name
     Button:
-        text: "retour à l'accueil"
-        on_press:root.manager.current='accueil'
+        id: details_btn
+        size_hint_x:0.2
+        text: "details"
+        on_press:root.on_click_details()
+    Button:
+        id: favourite_btn
+        size_hint_x:0.2
 
 
-<FavouritesScreen>:
+<FoodsList@FloatLayout>:
+    layout: layout
+    size: root.size
     BoxLayout:
+        size: 1920,1080
         orientation:'vertical'
-        Label:
-            text: 'favourites screen'
-        Button:
-            text: "retour à l'accueil"
-            on_press:root.manager.current='accueil'
+        ActionBar:
+            ActionView:
+                ActionPrevious:
+                    title:"Pur Beurre"
+                    on_press:
+                        root.manager.current="accueil"
+                ActionButton:
+                    text: "précédent"
+                    on_press:
+                        root.manager.current="categories"
+        ScrollView:
+            GridLayout:
+                id: layout
+                cols: 1
+                row_force_default: True
+                row_default_height: 40
+                height: self.minimum_height
+
+<CategoryList@FloatLayout>:
+    cat_layout: cat_layout
+    BoxLayout:
+        size: root.size
+        orientation:'vertical'
+        ActionBar:
+            ActionView:
+                ActionPrevious:
+                    title:"Pur Beurre"
+                    on_press:
+                        root.manager.current="accueil"
+                ActionButton:
+                    text: "précédent"
+                    on_press:
+                        root.manager.current="accueil"
+        ScrollView:
+            GridLayout:
+                size: root.size
+                id: cat_layout
+                cols: 1
+                row_force_default: True
+                row_default_height: 40
+                height: self.minimum_height
+
+<CategoryListItem>
+    btn: btn
+    Button:
+        id: btn
+        size: root.size
+        pos_hint: {'top': 1}
+        on_press: root.category_click()
