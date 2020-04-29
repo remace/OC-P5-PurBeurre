@@ -2,10 +2,12 @@ from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import Screen
 from actions_db import dbread
 from model.Item import Item
+from user_interface.mixins import CallbackMixin
+
 import webbrowser
 
 
-class ItemView(Screen):
+class ItemView(CallbackMixin, Screen):
     name = ObjectProperty(None)
     ingredients = ObjectProperty(None)
     additives = ObjectProperty(None)
@@ -15,12 +17,13 @@ class ItemView(Screen):
     stores = ObjectProperty(None)
     barcode = ObjectProperty(None)
     url = ObjectProperty(None)
-    favourite = ObjectProperty(None)
+    favourite_btn = ObjectProperty(None)
 
     def __init__(self, item_id=None):
         super().__init__()
         if item_id:
             item_dict = dbread.get_item(item_id)
+            item_dict['favourite'] = dbread.is_favourite_in_db(item_dict['food_id'])
             self.item = Item(item_dict)
             self.name.text = self.item.food_name
             self.ingredients.text = self.item.ingredients
@@ -31,7 +34,7 @@ class ItemView(Screen):
             self.stores.text = self.item.stores
             self.barcode.text = str(self.item.barcode)
             self.url.text = "lien vers Open Food Facts"
-            self.favourite.text = "supprimer des favoris" if self.item.is_favourite() else "ajouter aux favoris"
+            self.favourite_btn.text = "supprimer des favoris" if self.item.favourite else "ajouter aux favoris"
 
     def update(self, item_id):
         item_dict = dbread.get_item(item_id)
@@ -46,16 +49,17 @@ class ItemView(Screen):
         self.stores.text = self.item.stores
         self.barcode.text = str(self.item.barcode)
         self.url.text = "lien vers Open Food Facts"
-        self.favourite.text = "supprimer des favoris" if self.item.is_favourite() else "ajouter aux favoris"
-
+        self.favourite_btn.text = "supprimer des favoris" if self.item.favourite else "ajouter aux favoris"
 
     def click_link(self):
-        webbrowser.open(self.item.url)
+        webbrowser.open("https://fr.openfoodfacts.org/produit/"+str(self.item.barcode))
 
-    def click_favourite(self):
-        self.item.favourite = not(self.item.favourite)
-        # TODO répercuter le changement en DB
-
-        self.favourite.text =  "supprimer des favoris" if self.item.is_favourite() else "ajouter aux favoris"
+    # def click_favourite(self):
+    #     self.item.favourite = not self.item.favourite
+    #     if self.item.favourite:
+    #         dbread.set_favourite(self.item.food_id)
+    #     else:
+    #         dbread.reset_favourite(self.item.food_id)
+    #     self.favourite_b.text = "supprimer des favoris" if self.item.favourite else "ajouter aux favoris"
 
 

@@ -1,6 +1,7 @@
 import kivy
 from kivy.config import Config
 
+from kivy.base import runTouchApp
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
@@ -32,13 +33,13 @@ class FavouritesScreen(Screen):
 
 
 class PurBeurreApp(App):
-
+    title = "Pur Beurre"
     def on_stop(self):
         self.first_screen.stop.set()
 
     def build(self):
         # delete multitouch behaviour simulator (red dots on labels for example)
-        # Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
+        Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
         Builder.load_file('PurBeurre.kv')
         screen_manager = ScreenManager()

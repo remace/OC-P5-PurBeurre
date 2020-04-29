@@ -5,6 +5,8 @@ from kivy.clock import Clock, mainthread
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import Screen
 
+from user_interface import itemLists
+
 
 class FirstScreen(Screen):
     db_state_text = StringProperty()
@@ -36,3 +38,12 @@ class FirstScreen(Screen):
         dbcreate.process_update(notifier=self.notify)
         self.notify("DB Updated")
         self.update_button(True)
+
+
+    def press_categories(self):
+        manager = self.parent
+        next_screen = manager.get_screen('categories')
+        next_screen.clear_widgets()
+        view = itemLists.CategoryList(self.item.food_id)
+        next_screen.add_widget(view)
+        manager.current = 'categories'

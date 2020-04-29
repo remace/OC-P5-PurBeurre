@@ -1,7 +1,5 @@
 from kivy.properties import ObjectProperty
-from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.layout import Layout
 from kivy.uix.widget import Widget
 import actions_db
 from user_interface.buttons import FoodsListItem, CategoryListItem
@@ -33,7 +31,7 @@ class CategoryList(FloatLayout):
 
 class FoodsList(FloatLayout):
 
-    layout = ObjectProperty()
+    foods_layout = ObjectProperty()
 
     @property
     def manager(self):
@@ -47,7 +45,7 @@ class FoodsList(FloatLayout):
     def __init__(self, iid=None):
         super().__init__()
         if iid:
-            self.items = actions_db.dbread.get_foods(iid)
+            self.items = actions_db.dbread.get_foods_as_list_of_objects(iid)
             self.build_layout()
 
     def update_layout(self, iid):
@@ -56,7 +54,7 @@ class FoodsList(FloatLayout):
 
     def build_layout(self):
         for i in self.items:
-            self.layout.add_widget(FoodsListItem(i))
+            self.foods_layout.add_widget(FoodsListItem(i))
 
 
 class FavouritesList(Widget):

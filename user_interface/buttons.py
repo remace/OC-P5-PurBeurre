@@ -1,25 +1,20 @@
 from kivy.properties import ObjectProperty
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.widget import Widget
-
 from user_interface import itemLists
 from user_interface import itemView
+from user_interface.mixins import CallbackMixin
 
 
-class FoodsListItem(FloatLayout):
+class FoodsListItem(CallbackMixin, FloatLayout):
     name = ObjectProperty()
     details_btn = ObjectProperty()
-    fav_btn = ObjectProperty()
+    favourite_btn = ObjectProperty()
 
     def __init__(self, item):
         super().__init__()
-
-        self.item_id = item['id']
-        self.name = item['name']
-        # self.fav_btn.text = "supprimer des favoris" if item.favourite else "ajouter aux favoris"
-        self.fav_btn.text = "ajouter aux favoris"
+        self.item = item
+        self.name.text = self.item.food_name
+        self.favourite_btn.text = "supprimer des favoris" if self.item.favourite else "ajouter aux favoris"
 
     @property
     def manager(self):
@@ -34,19 +29,22 @@ class FoodsListItem(FloatLayout):
         manager = self.manager
         next_screen = manager.get_screen('item')
         next_screen.clear_widgets()
-        view = itemView.ItemView(self.item_id)
+        view = itemView.ItemView(self.item.food_id)
         next_screen.add_widget(view)
         manager.current = 'item'
 
-    def on_click_fav(self):
-
-        pass
+    # def on_click_fav(self):
+    #     self.item.favourite = not self.item.favourite
+    #     if self.item.favourite:
+    #         dbread.set_favourite(self.item.food_id)
+    #     else:
+    #         dbread.reset_favourite(self.item.food_id)
+    #     self.fav_btn.text = "supprimer des favoris" if self.item.favourite else "ajouter aux favoris"
 
 
 class CategoryListItem(FloatLayout):
 
     btn = ObjectProperty()
-
     @property
     def manager(self):
         parent = self

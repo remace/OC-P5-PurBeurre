@@ -18,9 +18,10 @@
             on_press:
                 root.manager.current='categories'
         Button:
-            text:"visualiser l'historique"
+            text:"visualiser les favoris"
             size_hint_y:0.2
-            on_press: root.manager.current='favourites'
+            on_press:
+                root.press_categories
 
 <ItemView>:
     name : item_name
@@ -32,7 +33,7 @@
     stores : item_stores
     barcode : item_barcode
     url : item_url
-    favourite : favourite
+    favourite_btn : favourite_btn
     BoxLayout:
         orientation:'vertical'
         ActionBar:
@@ -101,35 +102,38 @@
                 on_press: root.click_link();
 
             Button:
-                id : favourite
+                id : favourite_btn
                 text : ""
-                on_press: root.click_favourite()
+                on_press: root.on_click_favorite()
 
 
-<FoodsListItem>:
+<FoodsListItem@FloatLayout>:
     name: item_name
     details_btn: details_btn
-    fav_btn: favourite_btn
-    size: root.size
-    orientation: 'horizontal'
-    width :
-    Label:
-        id: item_name
-    Button:
-        id: details_btn
-        size_hint_x:0.2
-        text: "details"
-        on_press:root.on_click_details()
-    Button:
-        id: favourite_btn
-        size_hint_x:0.2
+    favourite_btn: favourite_btn
+    BoxLayout:
+        pos_hint: {'top': 1}
+        size: root.size
+        orientation: 'horizontal'
+        Label:
+            id: item_name
+            size_hint_x:0.5
+        Button:
+            id: details_btn
+            size_hint_x:0.25
+            text: "details"
+            on_press:root.on_click_details()
+        Button:
+            id: favourite_btn
+            size_hint_x:0.25
+            on_press:
+                root.on_click_favorite()
 
 
 <FoodsList@FloatLayout>:
-    layout: layout
-    size: root.size
+    foods_layout: foods_layout
     BoxLayout:
-        size: 1920,1080
+        size: root.size
         orientation:'vertical'
         ActionBar:
             ActionView:
@@ -143,8 +147,9 @@
                         root.manager.current="categories"
         ScrollView:
             GridLayout:
-                id: layout
+                id: foods_layout
                 cols: 1
+                size_hint_y: None
                 row_force_default: True
                 row_default_height: 40
                 height: self.minimum_height
@@ -168,12 +173,13 @@
             GridLayout:
                 size: root.size
                 id: cat_layout
+                size_hint_y: None
                 cols: 1
                 row_force_default: True
                 row_default_height: 40
                 height: self.minimum_height
 
-<CategoryListItem>
+<CategoryListItem@FloatLayout>
     btn: btn
     Button:
         id: btn

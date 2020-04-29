@@ -1,5 +1,6 @@
+
 class Item:
-    def __init__(self, item, favourite=False, **kwargs):
+    def __init__(self, item, **kwargs):
         self.food_id = item['food_id']
         self.category_id = item['category_id']
         self.food_name = item['name']
@@ -11,4 +12,5 @@ class Item:
         self.stores = item['stores']
         self.barcode = item['barcode']
         self.url = item['url']
-        self.favourite = favourite
+        self.favourite = item['favourite']
+        # self.favourite = dbread.is_favourite_in_db(self.food_id)
