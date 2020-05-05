@@ -1,13 +1,10 @@
 import kivy
 from kivy.config import Config
-
-from kivy.base import runTouchApp
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
-kivy.require("1.11.1")
 from user_interface import first_screen, itemLists, itemView
-
+kivy.require("1.11.1")
 
 class CategoriesScreen(Screen):
     def __init__(self, **kwargs):
@@ -21,19 +18,26 @@ class FoodsScreen(Screen):
         self.add_widget(itemLists.FoodsList())
 
 
+class SubstitutesScreen(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.add_widget(itemLists.SubstitutesList())
+
+
 class ItemsScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.add_widget(itemView.ItemView())
 
-class FavouritesScreen(Screen):
 
+class FavouritesScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
 
 class PurBeurreApp(App):
     title = "Pur Beurre"
+
     def on_stop(self):
         self.first_screen.stop.set()
 
@@ -48,6 +52,7 @@ class PurBeurreApp(App):
         screen_manager.add_widget(CategoriesScreen(name='categories'))
         screen_manager.add_widget(FoodsScreen(name='foods'))
         screen_manager.add_widget(ItemsScreen(name='item'))
+        screen_manager.add_widget(SubstitutesScreen(name="substitutes"))
         screen_manager.add_widget(FavouritesScreen(name='favourites'))
         return screen_manager
 

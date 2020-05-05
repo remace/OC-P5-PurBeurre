@@ -1,5 +1,5 @@
 from actions_db.cursor_Wrapper import CursorWrapper
-from model.Item import Item
+from model.Item import Item, Favourite
 
 
 def get_categories():
@@ -37,7 +37,6 @@ class Category:
         self.name = row[1]
 
 
-
 def get_foods(category_id):
     cursor_wrapper = CursorWrapper()
     sql = "SELECT food_id, food_name FROM foods WHERE category_id = {}".format(category_id)
@@ -66,8 +65,8 @@ def get_foods_as_list_of_objects(category_id):
                 'name': item[2],
                 'ingredients': item[3],
                 'additives': item[4],
-                'nutrients': item[5],
-                'nutriscore': item[6],
+                'nutrients': item[6],
+                'nutriscore': item[5],
                 'labels': item[7],
                 'stores': item[8],
                 'barcode': item[9],
@@ -109,21 +108,22 @@ def get_favourites():
         favourites_list = cursor.fetchall()
         favourites = []
         for item in favourites_list:
+            print(item)
             food_dict = {
-                'food_id': item[0],
-                'category_id': item[1],
-                'name': item[2],
-                'ingredients': item[3],
-                'additives': item[4],
-                'nutrients': item[5],
-                'nutriscore': item[6],
-                'labels': item[7],
-                'stores': item[8],
-                'barcode': item[9],
-                'url': item[10],
-                'favourite': is_favourite_in_db(item[0])
+                'food_id': item[3],
+                'category_id': item[4],
+                'name': item[5],
+                'ingredients': item[6],
+                'additives': item[7],
+                'nutrients': item[9],
+                'nutriscore': item[8],
+                'labels': item[10],
+                'stores': item[11],
+                'barcode': item[12],
+                'url': item[13],
+                'favourite': True
             }
-            favourite = Item(food_dict)
+            favourite = Favourite(food_dict, item[2])
             favourites.append(favourite)
     return favourites
 
@@ -151,8 +151,34 @@ def is_favourite_in_db(food_id):
     return bool(item_list)
 
 
+def get_substitutes(cat_id, nutriscore):
+    cursor_wrapper = CursorWrapper()
+    sql = f"SELECT * FROM mydb.foods WHERE category_id={cat_id} AND nutriscore < '{nutriscore}' ORDER BY nutriscore;"
+    with cursor_wrapper as cursor:
+        cursor.execute(sql, commit=False)
+        item_list = cursor.fetchall()
+        items = []
+        for item in item_list:
+            item_dict = {
+                'food_id': item[0],
+                'category_id': item[1],
+                'name': item[2],
+                'ingredients': item[3],
+                'additives': item[4],
+                'nutrients': item[6],
+                'nutriscore': item[5],
+                'labels': item[7],
+                'stores': item[8],
+                'barcode': item[9],
+                'url': item[10],
+                'favourite': is_favourite_in_db(item[0])
+            }
+            food = Item(item_dict)
+            items.append(food)
+    return items
+
+
 if __name__ == '__main__':
-
-    print(get_favourites())
-
-    # scores = f"SELECT * FROM mydb.foods WHERE category_id={id} AND nutriscore < '{ns}';"
+    items = get_favourites()
+    for i in items:
+        print(i)
