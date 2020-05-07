@@ -108,7 +108,6 @@ def get_favourites():
         favourites_list = cursor.fetchall()
         favourites = []
         for item in favourites_list:
-            print(item)
             food_dict = {
                 'food_id': item[3],
                 'category_id': item[4],

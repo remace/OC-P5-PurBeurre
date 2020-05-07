@@ -10,11 +10,11 @@
             size_hint_y: 0.4
         Button:
             id: db_update_button
-            text:'mettre Ã  jour la base de donnÃ©es'
+            text:'mettre à jour la base de données'
             size_hint_y:0.2
             on_press: root.async_update_db()
         Button:
-            text:"rechercher un produit alternatif Ã  partir d'un produit existant"
+            text:"rechercher un produit alternatif à partir d'un produit existant"
             size_hint_y:0.2
             on_press:
                 root.press_categories()
@@ -44,14 +44,14 @@
                     on_press:
                         root.parent.manager.current="accueil"
                 ActionButton:
-                    text: "prÃ©cÃ©dent"
+                    text: "précédent"
                     on_press:
                         root.parent.manager.current="foods"
         ScrollView:
             GridLayout:
                 cols:2
                 size_hint_y: None
-                # row_force_default: True
+                row_force_default: True
                 row_default_height: 40
                 height: self.minimum_height
                 Label:
@@ -134,6 +134,7 @@
         Label:
             id: item_name
             size_hint_x:0.45
+
         Button:
             id: details_btn
             size_hint_x:0.25
@@ -144,21 +145,19 @@
             on_press:
                 root.on_click_substitute()
             size_hint_x:0.25
-
         Button:
             id: favourite_btn
-            size_hint_x:0.05
+            size_hint_x: 0.05
             on_press:
                 root.on_click_favorite()
                 root.change_fav_image()
             Image:
                 id: favourite_btn_image
-                source: ""
+                source: "./ressources/img/unfav_icon.png"
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-                height: self.parent.height*0.75
-                width: self.parent.height*0.75
-                allow_stretch: True
+                height: 40
+                width: self.parent.height * 0.75
 
 
 
@@ -175,7 +174,7 @@
                     on_press:
                         root.manager.current="accueil"
                 ActionButton:
-                    text: "prÃ©cÃ©dent"
+                    text: "précédent"
                     on_press:
                         root.manager.current="categories"
         ScrollView:
@@ -199,7 +198,7 @@
                     on_press:
                         root.manager.current="accueil"
                 ActionButton:
-                    text: "prÃ©cÃ©dent"
+                    text: "précédent"
                     on_press:
                         root.manager.current="accueil"
         ScrollView:
@@ -248,12 +247,11 @@
                 root.change_fav_image()
             Image:
                 id: favourite_btn_image
-                source: ""
+                source: "./ressources/img/unfav_icon.png"
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-                height: self.parent.height*0.75
-                width: self.parent.height*0.75
-                allow_stretch: True
+                height: 40
+                width: self.parent.height * 0.75
 
 <SubstitutesList@FloatLayout>:
     substitutes_layout: substitutes_layout
@@ -267,7 +265,7 @@
                     on_press:
                         root.manager.current="accueil"
                 ActionButton:
-                    text: "prÃ©cÃ©dent"
+                    text: "précédent"
                     on_press:
                         root.manager.current="categories"
         ScrollView:
@@ -291,7 +289,7 @@
                     on_press:
                         root.manager.current="accueil"
                 ActionButton:
-                    text: "prÃ©cÃ©dent"
+                    text: "précédent"
                     on_press:
                         root.manager.current="accueil"
         ScrollView:

@@ -1,13 +1,16 @@
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import Screen
 from actions_db import dbread
+
 from model.Item import Item
-from user_interface.mixins import CallbackMixin
+from user_interface.mixins.favorite import FavoriteMixin
+from user_interface.mixins.substitute import SubstituteMixin
+from user_interface.mixins.properties import PropertiesMixin
 
 import webbrowser
 
 
-class ItemView(CallbackMixin, Screen):
+class ItemView(PropertiesMixin, FavoriteMixin, SubstituteMixin, Screen):
     name = ObjectProperty(None)
     ingredients = ObjectProperty(None)
     additives = ObjectProperty(None)

@@ -1,10 +1,12 @@
 from kivy.properties import ObjectProperty
 from kivy.uix.floatlayout import FloatLayout
 import actions_db
-from user_interface.buttons import FoodsListItem, CategoryListItem, SubstituteListItem
+from user_interface import buttons
+
+from user_interface.mixins.properties import PropertiesMixin
 
 
-class CategoryList(FloatLayout):
+class CategoryList(PropertiesMixin, FloatLayout):
 
     cat_layout = ObjectProperty()
 
@@ -16,30 +18,12 @@ class CategoryList(FloatLayout):
     def build_layout(self):
         self.cat_layout.clear_widgets()
         for i in self.foods:
-            self.cat_layout.add_widget(CategoryListItem(i))
-
-    @property
-    def manager(self):
-        parent = self
-        manager = None
-        while manager is None:
-            parent = getattr(parent, 'parent')
-            manager = getattr(parent, 'manager', None)
-        return manager
+            self.cat_layout.add_widget(buttons.CategoryListItem(i))
 
 
-class FoodsList(FloatLayout):
+class FoodsList(PropertiesMixin, FloatLayout):
 
     foods_layout = ObjectProperty()
-
-    @property
-    def manager(self):
-        parent = self
-        manager = None
-        while manager is None:
-            parent = getattr(parent, 'parent')
-            manager = getattr(parent, 'manager', None)
-        return manager
 
     def __init__(self, iid=None):
         super().__init__()
@@ -53,10 +37,10 @@ class FoodsList(FloatLayout):
 
     def build_layout(self):
         for i in self.items:
-            self.foods_layout.add_widget(FoodsListItem(i))
+            self.foods_layout.add_widget(buttons.FoodsListItem(i))
 
 
-class SubstitutesList(FloatLayout):
+class SubstitutesList(PropertiesMixin, FloatLayout):
 
     substitutes_layout = ObjectProperty()
 
@@ -66,18 +50,9 @@ class SubstitutesList(FloatLayout):
             self.items = actions_db.dbread.get_substitutes(cat_id, nutriscore)
             self.build_layout()
 
-    @property
-    def manager(self):
-        parent = self
-        manager = None
-        while manager is None:
-            parent = getattr(parent, 'parent')
-            manager = getattr(parent, 'manager', None)
-        return manager
-
     def build_layout(self):
         for item in self.items:
-            self.substitutes_layout.add_widget(SubstituteListItem(item))
+            self.substitutes_layout.add_widget(buttons.SubstituteListItem(item))
 
     def update_layout(self, cat_id, nutriscore):
         self.items = self.items = actions_db.dbread.get_substitutes(cat_id, nutriscore)
@@ -85,17 +60,8 @@ class SubstitutesList(FloatLayout):
             self.build_layout()
 
 
-class FavouritesList(FloatLayout):
+class FavouritesList(PropertiesMixin, FloatLayout):
     fav_layout = ObjectProperty()
-
-    @property
-    def manager(self):
-        parent = self
-        manager = None
-        while manager is None:
-            parent = getattr(parent, 'parent')
-            manager = getattr(parent, 'manager', None)
-        return manager
 
     def __init__(self):
         super().__init__()
@@ -105,7 +71,7 @@ class FavouritesList(FloatLayout):
     def build_layout(self):
         self.fav_layout.clear_widgets()
         for item in self.items:
-            self.fav_layout.add_widget(SubstituteListItem(item))
+            self.fav_layout.add_widget(buttons.SubstituteListItem(item))
 
     def update_layout(self):
         self.items = actions_db.dbread.get_favourites()
