@@ -15,3 +15,7 @@ class FavoriteMixin:
         self.image.source = "./ressources/img/unfav_icon.png" if self.item.favourite else "./ressources/img/fav_icon.png"
         self.favourite_btn.text = ""
         self.favourite_btn.background_color = (1, 0, 0, 1) if self.item.favourite else (0, 1, 0, 1)
+
+    def reload_favourite_screen(self):
+        if self.manager.current == 'favourites':
+            self.parent.remove_widget(self)

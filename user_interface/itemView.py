@@ -43,6 +43,7 @@ class ItemView(PropertiesMixin, FavoriteMixin, SubstituteMixin, Screen):
         item_dict = dbread.get_item(item_id)
         self.item = Item(item_dict)
 
+
         self.name.text = self.item.food_name
         self.ingredients.text = self.item.ingredients
         self.additives.text = self.item.additives
