@@ -22,7 +22,7 @@ if the user selects option 1, the program asks those following questions:
 * get OpenFoodFacts database
 * Search ingredients in personnal database database, by category
 * display some details about a particular product
-* search for substitutes for a given product. 
+* search for substitutes for a given product (find in the same category products with a better nutriscore) 
 * save a list of favourite products in personnal database
 * user interface with kivy
 * database must be on a mysql database
@@ -49,4 +49,4 @@ if the user selects option 1, the program asks those following questions:
 
 #### purbeurre App
 
-* TODO pour fournir une build windows et une build linux
+* TODO push a windows and a linux build
