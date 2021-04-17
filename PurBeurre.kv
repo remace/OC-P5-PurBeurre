@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: ISO-8859-1 -*-
 
 <FirstScreen>:
     state_lbl : db_state_label
@@ -10,7 +10,7 @@
             text: root.db_state_text
             size_hint_y: 0.4
         Button:
-            text:"rechercher un produit alternatif à partir d'un produit existant"
+            text:"rechercher un produit alternatif Ã  partir d'un produit existant"
             size_hint_y:0.2
             on_press:
                 root.press_categories()
@@ -22,7 +22,7 @@
 
         Button:
             id: db_update_button
-            text:'mettre à jour la base de données'
+            text:'mettre Ã  jour la base de donnÃ©es'
             size_hint_y:0.2
             on_press: root.confirmation_popup()
 
@@ -164,8 +164,6 @@
                 width: self.parent.height * 0.75
 
 
-
-
 <FoodsList@FloatLayout>:
     foods_layout: foods_layout
     BoxLayout:
@@ -178,7 +176,7 @@
                     on_press:
                         root.manager.current="accueil"
                 ActionButton:
-                    text: "précédent"
+                    text: "prÃ©cÃ©dent"
                     on_press:
                         root.manager.current="categories"
         ScrollView:
@@ -202,7 +200,7 @@
                     on_press:
                         root.manager.current="accueil"
                 ActionButton:
-                    text: "précédent"
+                    text: "prÃ©cÃ©dent"
                     on_press:
                         root.manager.current="accueil"
         ScrollView:
@@ -270,7 +268,7 @@
                     on_press:
                         root.manager.current="accueil"
                 ActionButton:
-                    text: "précédent"
+                    text: "prÃ©cÃ©dent"
                     on_press:
                         root.manager.current="foods"
         ScrollView:
@@ -294,15 +292,14 @@
                     on_press:
                         root.manager.current="accueil"
                 ActionButton:
-                    text: "précédent"
+                    text: "prÃ©cÃ©dent"
                     on_press:
                         root.manager.current="accueil"
         ScrollView:
             GridLayout:
-                size: root.size
                 id: fav_layout
-                size_hint_y: None
                 cols: 1
+                size_hint_y: None
                 row_force_default: True
                 row_default_height: 40
                 height: self.minimum_height

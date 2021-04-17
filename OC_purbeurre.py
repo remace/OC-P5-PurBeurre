@@ -4,7 +4,8 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 from user_interface import first_screen, itemLists, itemView
-kivy.require("1.11.1")
+kivy.require('2.0.0')
+
 
 class CategoriesScreen(Screen):
     def __init__(self, **kwargs):

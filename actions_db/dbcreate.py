@@ -2,10 +2,10 @@ import functools
 import requests
 from actions_db.cursor_Wrapper import CursorWrapper
 
-db_user = 'root'
+db_user = 'PurBeurre'
 db_host = 'localhost'
-db_password = 'root'
-db_database = 'mydb'
+db_password = 'PurBeurre'
+db_database = 'PurBeurre'
 db_auth_plugin = 'mysql_native_password'
 
 CATEGORIES_SIZE = 5
@@ -147,7 +147,7 @@ def get_foods(cursor_wrapper, category_url, category_id, category_name, index, n
 
 
 def empty_db(cursor_wrapper):
-    sql = "DELETE FROM mydb.categories WHERE category_id >= 0 ;"   # todo soutien BDD
+    sql = "DELETE FROM PurBeurre.categories WHERE category_id >= 0 ;"   # todo soutien BDD
 
     with cursor_wrapper as cursor:
         _ = cursor.execute(sql, commit=True)

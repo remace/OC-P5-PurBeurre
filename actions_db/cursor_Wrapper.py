@@ -1,11 +1,20 @@
 from mysql import connector
 import mysql.connector
 
-DB_USER = 'root'
-DB_HOST = 'localhost'
-DB_PASSWORD = 'root'
-DB_DATABASE = 'mydb'
+
+# DB_USER = 'root'
+# DB_HOST = 'localhost'
+# DB_PASSWORD = 'root'
+# DB_DATABASE = 'mydb'
+# DB_AUTH_PLUGIN = 'mysql_native_password'
+
+DB_USER = 'PurBeurre'
+DB_HOST = '127.0.0.1'
+DB_PASSWORD = 'PurBeurre'
+DB_DATABASE = 'PurBeurre'
 DB_AUTH_PLUGIN = 'mysql_native_password'
+
+
 
 # mydb = mysql.connector.connect(
 #     host=DB_HOST,

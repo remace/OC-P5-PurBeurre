@@ -80,7 +80,7 @@ def get_foods_as_list_of_objects(category_id):
 
 def get_item(food_id):
     cursor_wrapper = CursorWrapper()
-    sql = "SELECT * FROM mydb.foods WHERE food_id = {}".format(food_id)
+    sql = "SELECT * FROM PurBeurre.foods WHERE food_id = {}".format(food_id)
     with cursor_wrapper as cursor:
         cursor.execute(sql, commit=False)
         item_list = cursor.fetchall()
@@ -102,7 +102,7 @@ def get_item(food_id):
 
 def get_favourites():
     cursor_wrapper = CursorWrapper()
-    sql = "SELECT * FROM mydb.favourites INNER JOIN mydb.foods ON mydb.favourites.food_id = mydb.foods.food_id "
+    sql = "SELECT * FROM PurBeurre.favourites INNER JOIN PurBeurre.foods ON PurBeurre.favourites.food_id = PurBeurre.foods.food_id "
     with cursor_wrapper as cursor:
         cursor.execute(sql, commit=False)
         favourites_list = cursor.fetchall()
@@ -129,21 +129,21 @@ def get_favourites():
 
 def set_favourite(food_id):
     cursor_wrapper = CursorWrapper()
-    sql = "INSERT INTO mydb.favourites (food_id) VALUES ({})".format(food_id)
+    sql = "INSERT INTO PurBeurre.favourites (food_id) VALUES ({})".format(food_id)
     with cursor_wrapper as cursor:
         cursor.execute(sql, commit=True)
 
 
 def reset_favourite(food_id):
     cursor_wrapper = CursorWrapper()
-    sql = "DELETE FROM mydb.favourites WHERE food_id ={}".format(food_id)
+    sql = "DELETE FROM PurBeurre.favourites WHERE food_id ={}".format(food_id)
     with cursor_wrapper as cursor:
         cursor.execute(sql, commit=True)
 
 
 def is_favourite_in_db(food_id):
     cursor_wrapper = CursorWrapper()
-    sql = "SELECT * FROM mydb.favourites WHERE food_id = {}".format(food_id)
+    sql = "SELECT * FROM PurBeurre.favourites WHERE food_id = {}".format(food_id)
     with cursor_wrapper as cursor:
         cursor.execute(sql, commit=False)
         item_list = cursor.fetchall()
@@ -152,7 +152,7 @@ def is_favourite_in_db(food_id):
 
 def get_substitutes(cat_id, nutriscore):
     cursor_wrapper = CursorWrapper()
-    sql = f"SELECT * FROM mydb.foods WHERE category_id={cat_id} AND nutriscore < '{nutriscore}' ORDER BY nutriscore;"
+    sql = f"SELECT * FROM PurBeurre.foods WHERE category_id={cat_id} AND nutriscore < '{nutriscore}' ORDER BY nutriscore;"
     with cursor_wrapper as cursor:
         cursor.execute(sql, commit=False)
         item_list = cursor.fetchall()

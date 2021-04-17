@@ -10,23 +10,24 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb` ;
+DROP SCHEMA IF EXISTS `PurBeurre` ;
 
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `PurBeurre` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
 -- Schema new_schema1
 -- -----------------------------------------------------
-USE `mydb` ;
+USE `PurBeurre` ;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`categories`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `PurBeurre`.`categories` ;
 DROP TABLE IF EXISTS `mydb`.`categories` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`categories` (
+CREATE TABLE IF NOT EXISTS `PurBeurre`.`categories` (
   `category_id` INT NOT NULL AUTO_INCREMENT,
   `category_name` VARCHAR(1000) NOT NULL,
   PRIMARY KEY (`category_id`));
@@ -35,29 +36,31 @@ CREATE TABLE IF NOT EXISTS `mydb`.`categories` (
 -- -----------------------------------------------------
 -- Table `mydb`.`favourites`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `PurBeurre`.`favourites` ;
 DROP TABLE IF EXISTS `mydb`.`favourites` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`favourites` (
+CREATE TABLE IF NOT EXISTS `PurBeurre`.`favourites` (
   `favorite_id` INT NOT NULL AUTO_INCREMENT,
   `food_id` INT NOT NULL,
   `created_at` DATETIME NULL DEFAULT NOW(),
   PRIMARY KEY (`favorite_id`),
   CONSTRAINT `fk_food_int`
     FOREIGN KEY (`food_id`)
-    REFERENCES `mydb`.`foods` (`food_id`)
+    REFERENCES `PurBeurre`.`foods` (`food_id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_food_int_idx` ON `mydb`.`favourites` (`food_id` ASC) INVISIBLE;
+CREATE INDEX `fk_food_int_idx` ON `PurBeurre`.`favourites` (`food_id` ASC) INVISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`foods`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `mydb`.`foods` ;
+DROP TABLE IF EXISTS `PurBeurre`.`foods` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`foods` (
+CREATE TABLE IF NOT EXISTS `PurBeurre`.`foods` (
   `food_id` INT NOT NULL AUTO_INCREMENT,
   `category_id` INT NOT NULL,
   `food_name` VARCHAR(1000) NOT NULL,
@@ -77,9 +80,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`foods` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `food_id_UNIQUE` ON `mydb`.`foods` (`food_id` ASC) VISIBLE;
+CREATE UNIQUE INDEX `food_id_UNIQUE` ON `PurBeurre`.`foods` (`food_id` ASC) VISIBLE;
 
-CREATE INDEX `category_id_idx` ON `mydb`.`foods` (`category_id` ASC) VISIBLE;
+CREATE INDEX `category_id_idx` ON `PurBeurre`.`foods` (`category_id` ASC) VISIBLE;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
