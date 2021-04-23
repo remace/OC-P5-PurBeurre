@@ -8,12 +8,12 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema PurBeurre
 -- -----------------------------------------------------
 DROP SCHEMA IF EXISTS `PurBeurre` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema PurBeurre
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `PurBeurre` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
@@ -22,10 +22,9 @@ CREATE SCHEMA IF NOT EXISTS `PurBeurre` DEFAULT CHARACTER SET utf8 ;
 USE `PurBeurre` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`categories`
+-- Table `PurBeurre`.`categories`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `PurBeurre`.`categories` ;
-DROP TABLE IF EXISTS `mydb`.`categories` ;
 
 CREATE TABLE IF NOT EXISTS `PurBeurre`.`categories` (
   `category_id` INT NOT NULL AUTO_INCREMENT,
@@ -34,10 +33,9 @@ CREATE TABLE IF NOT EXISTS `PurBeurre`.`categories` (
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`favourites`
+-- Table `PurBeurre`.`favourites`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `PurBeurre`.`favourites` ;
-DROP TABLE IF EXISTS `mydb`.`favourites` ;
 
 CREATE TABLE IF NOT EXISTS `PurBeurre`.`favourites` (
   `favorite_id` INT NOT NULL AUTO_INCREMENT,
@@ -51,13 +49,11 @@ CREATE TABLE IF NOT EXISTS `PurBeurre`.`favourites` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_food_int_idx` ON `PurBeurre`.`favourites` (`food_id` ASC) INVISIBLE;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`foods`
+-- Table `PurBeurre`.`foods`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`foods` ;
 DROP TABLE IF EXISTS `PurBeurre`.`foods` ;
 
 CREATE TABLE IF NOT EXISTS `PurBeurre`.`foods` (
@@ -75,15 +71,10 @@ CREATE TABLE IF NOT EXISTS `PurBeurre`.`foods` (
   PRIMARY KEY (`food_id`),
   CONSTRAINT `category_id`
     FOREIGN KEY (`category_id`)
-    REFERENCES `mydb`.`categories` (`category_id`)
+    REFERENCES `PurBeurre`.`categories` (`category_id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-CREATE UNIQUE INDEX `food_id_UNIQUE` ON `PurBeurre`.`foods` (`food_id` ASC) VISIBLE;
-
-CREATE INDEX `category_id_idx` ON `PurBeurre`.`foods` (`category_id` ASC) VISIBLE;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
