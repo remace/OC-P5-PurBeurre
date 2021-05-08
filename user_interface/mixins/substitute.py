@@ -1,9 +1,9 @@
-from itemLists import SubstitutesList
 
 
 class SubstituteMixin:
 
     def on_click_substitute(self):
+        from user_interface.itemLists import SubstitutesList
         manager = self.manager
         next_screen = manager.get_screen('substitutes')
         next_screen.clear_widgets()

@@ -1,4 +1,3 @@
-
 class Item:
     def __init__(self, item, **kwargs):
         self.food_id = item['food_id']

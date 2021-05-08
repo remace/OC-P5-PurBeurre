@@ -1,22 +1,10 @@
-from mysql import connector
 import mysql.connector
-
-DB_USER = 'PurBeurre'
-DB_HOST = 'localhost'
-DB_PASSWORD = 'PurBeurre'
-DB_DATABASE = 'PurBeurre'
-DB_AUTH_PLUGIN = 'mysql_native_password'
-
-
-
-# mydb = mysql.connector.connect(
-#     host=DB_HOST,
-#     user=DB_USER,
-#     password=DB_PASSWORD,
-#     database=DB_DATABASE,
-#     auth_plugin=DB_AUTH_PLUGIN
-# )
-
+import settings
+DB_USER = settings.DB_USER
+DB_HOST = settings.DB_HOST
+DB_PASSWORD = settings.DB_PASSWORD
+DB_DATABASE = settings.DB_DATABASE
+DB_AUTH_PLUGIN = settings.DB_AUTH_PLUGIN
 
 class CursorWrapper:
 

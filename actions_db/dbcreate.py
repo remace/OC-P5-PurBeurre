@@ -1,15 +1,10 @@
 import functools
 import requests
+import settings
 from actions_db.cursor_Wrapper import CursorWrapper
 
-db_user = 'PurBeurre'
-db_host = 'localhost'
-db_password = 'PurBeurre'
-db_database = 'PurBeurre'
-db_auth_plugin = 'mysql_native_password'
-
 CATEGORIES_SIZE = 5
-PRODUCT_PAGE_NUMBER = 1
+PRODUCT_PAGE_COUNT = settings.MAX_PAGE_COUNT
 
 categories_url = 'https://fr.openfoodfacts.org/categories.json'
 search_url = 'https://fr.openfoodfacts.org/cgi/search.pl'
@@ -86,7 +81,7 @@ def get_categories(cursor_wrapper, notifier=None):
 def get_foods(cursor_wrapper, category_url, category_id, category_name, index, notifier=None):
     operations = []
     # envoyer la requête
-    for page in range(1, PRODUCT_PAGE_NUMBER+1):
+    for page in range(1, PRODUCT_PAGE_COUNT+1):
         r = requests.get(category_url + "/" + str(page) + ".json")
         foods_json = r.json()
 

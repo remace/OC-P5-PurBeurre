@@ -54,7 +54,7 @@
             GridLayout:
                 cols:2
                 size_hint_y: None
-#                row_force_default: True
+#                 row_force_default: True
                 row_default_height: 40
                 height: self.minimum_height
                 Label:
@@ -126,7 +126,7 @@
                 root.on_click_substitute()
 
 
-<FoodsListItem@FloatLayout>:
+<FoodsListItem>:
     name: item_name
     details_btn: details_btn
     favourite_btn: favourite_btn
@@ -164,7 +164,7 @@
                 width: self.parent.height * 0.75
 
 
-<FoodsList@FloatLayout>:
+<FoodsList>:
     foods_layout: foods_layout
     BoxLayout:
         size: root.size
@@ -188,7 +188,7 @@
                 row_default_height: 40
                 height: self.minimum_height
 
-<CategoryList@FloatLayout>:
+<CategoryList>:
     cat_layout: cat_layout
     BoxLayout:
         size: root.size
@@ -213,7 +213,7 @@
                 row_default_height: 40
                 height: self.minimum_height
 
-<CategoryListItem@FloatLayout>
+<CategoryListItem>
     btn: btn
     Button:
         id: btn
@@ -223,7 +223,7 @@
 
 
 
-<SubstituteListItem@FloatLayout>:
+<SubstituteListItem>:
     name: item_name
     details_btn: details_btn
     favourite_btn: favourite_btn
@@ -256,7 +256,7 @@
                 height: 40
                 width: self.parent.height * 0.75
 
-<SubstitutesList@FloatLayout>:
+<SubstitutesList>:
     substitutes_layout: substitutes_layout
     BoxLayout:
         size: root.size
@@ -280,7 +280,7 @@
                 row_default_height: 40
                 height: self.minimum_height
 
-<FavouritesList@FloatLayout>:
+<FavouritesList>:
     fav_layout: fav_layout
     BoxLayout:
         size: root.size

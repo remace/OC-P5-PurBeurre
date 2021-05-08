@@ -1,4 +1,4 @@
-from itemView import ItemView
+from user_interface.itemView import ItemView
 
 
 class DetailsMixin:
