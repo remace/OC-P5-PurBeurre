@@ -17,5 +17,5 @@ else:
     DB_AUTH_PLUGIN = 'mysql_native_password'
 
 # data size for the local database
-MAX_PAGE_COUNT = 1 # nombre de pages de l'API, il y a 20 produits par page
+MAX_PAGE_COUNT = 1 # API page count. there are 20 product in each API page.
 MAX_CATEGORIES = 5
