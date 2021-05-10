@@ -12,7 +12,7 @@ the user has a choice:
 if the user selects option 1, the program asks those following questions:
 
 * select a category
-* select an products
+* select a products
 * the program prints this product's details (name, components, nutriscore, labels, nutrients, store, barcode, and a link to OpenfoodFacts' dedicated page) 
 * then the user can ask for a substitute, see its details or save this one in a favourite list
 
@@ -20,7 +20,7 @@ if the user selects option 1, the program asks those following questions:
 ## features
 
 * get OpenFoodFacts database
-* Search ingredients in personnal database database, by category
+* Search ingredients in personnal database, by category
 * display some details about a particular product
 * search for substitutes for a given product (find in the same category products with a better nutriscore) 
 * save a list of favourite products in personnal database
@@ -30,23 +30,50 @@ if the user selects option 1, the program asks those following questions:
 ## documentation
 
 ### dependencies: 
-
-* python 3.7 (not higher)
-* requests
+* Python 3.9
+* Kivy[base]
 * mysql-connector-python
-* docutils
-* pygments
-* kivy 1.11.1
-* kivy.deps.sdl2
-* kivy.deps.glew
+* requests
+
+and their dependencies. listed in requirements.txt files
 
 ### setup
+* clone this repo (next, the folder where you cloned the repo will be named [pythonpath])
 
 #### database
+* install Mysql
+    * windows:
+        * Download mysql setup tool
+        * setup at least the server
+    * linux:
+        * use integrated packet manager to install mariadb: apt, snap, flatpack, dnf, rpm...
+    * macOS
+        * find your own way to install mysql server
+    
+* configurer mysql
+    * create user PurBeurre with password PurBeurre
+    * create database PurBeurre
+    * grand all privileges to PurBeure@% on PurBeurre 
+    
+* importe le MPD in database
+    * execute "[pythonpath]/database/off.sql" within mysql command
+    
+#### Setup the app
+* setup the app
+    * [pythonpath]/settings.py
+    * you can use custom mysql if configured mysql in another way
+    * you can set the size of the data imported from Open Food Facts
 
-* install Mysql (mariadb)
-* execute "/database/off.sql"
+#### Virtual environment and dependencies
+* create and activate a virtual environment
+    * python3 -m venv env
+    * windows: env\Scripts\activate.bat ?
+    * linux: source ./env/bin/activate
 
-#### purbeurre App
+* install dependencies
+    windows: python3 -m pip install -r requirementswin.txt
+    linux: python3 -m pip install -r requirementsLinux.txt
 
-* TODO push a windows and a linux build
+#### Launch the app
+* to launch the App, use "python3 [pythonpath]/Purbeurre.py"
+
