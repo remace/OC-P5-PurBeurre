@@ -1,7 +1,9 @@
 import os
-app_env = os.environ.get('DEV')
 
-if app_env == "DEV":
+#config database
+app_env = os.environ.get('DEV_DB')
+
+if app_env == "True":
     DB_USER = 'PurBeurre'
     DB_HOST = '192.168.1.112'
     DB_PASSWORD = 'PurBeurre'

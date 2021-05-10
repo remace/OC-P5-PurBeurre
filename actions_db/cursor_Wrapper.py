@@ -1,5 +1,6 @@
 import mysql.connector
 import settings
+
 DB_USER = settings.DB_USER
 DB_HOST = settings.DB_HOST
 DB_PASSWORD = settings.DB_PASSWORD

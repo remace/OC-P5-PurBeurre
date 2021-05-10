@@ -23,6 +23,7 @@ class FoodsListItem(PropertiesMixin, FavoriteMixin,
         self.favourite_btn.background_color = (1, 0, 0, 1) if self.item.favourite else (0, 1, 0, 1)
 
 
+
 class SubstituteListItem(PropertiesMixin, FavoriteMixin, DetailsMixin, FloatLayout):
 
     def __init__(self, item):
