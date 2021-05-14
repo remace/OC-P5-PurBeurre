@@ -17,7 +17,7 @@ DROP SCHEMA IF EXISTS `PurBeurre` ;
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `PurBeurre` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
--- Schema new_schema1
+-- Schema PurBeurre
 -- -----------------------------------------------------
 USE `PurBeurre` ;
 
