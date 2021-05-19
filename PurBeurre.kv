@@ -126,19 +126,31 @@
                 root.on_click_substitute()
 
 
-<FoodsListItem>:
+<FoodsListItem@>:
     name: item_name
     details_btn: details_btn
     favourite_btn: favourite_btn
     image: favourite_btn_image
+    nutriscore: nutriscore
     BoxLayout:
         pos_hint: {'top': 1}
         size: root.size
         orientation: 'horizontal'
         Label:
             id: item_name
-            size_hint_x:0.45
+            size_hint_x:0.35
 
+        Label:
+            id: nutriscore
+            size_hint_x:0.10
+            background_color:(0,0,0,1)
+            canvas.before:
+                Color:
+                    rgba:
+                        self.background_color
+                Rectangle:
+                    size: self.size
+                    pos:self.pos
         Button:
             id: details_btn
             size_hint_x:0.25
@@ -228,6 +240,7 @@
     details_btn: details_btn
     favourite_btn: favourite_btn
     image: favourite_btn_image
+    nutriscore: nutriscore
     BoxLayout:
         pos_hint: {'top': 1}
         size: root.size
@@ -235,6 +248,20 @@
         Label:
             id: item_name
             size_hint_x:0.7
+
+        Label:
+            id: nutriscore
+            background_color:1,1,1,1
+            size_hint_x:0.10
+            background_color:(0,0,0,1)
+            canvas.before:
+                Color:
+                    rgba:
+                        self.background_color
+                Rectangle:
+                    size: self.size
+                    pos:self.pos
+
         Button:
             id: details_btn
             size_hint_x:0.25
