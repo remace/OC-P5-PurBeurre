@@ -33,7 +33,6 @@ class FoodsListItem(PropertiesMixin, FavoriteMixin,
             self.nutriscore.background_color =(255/255,0/255,0/255,255/255)
         else:
             self.nutriscore.background_color =(0,0,0,1)
-        print(f"{self.nutriscore.text} : {self.nutriscore.background_color}")
         self.nutriscore.text = self.item.nutriscore
         self.image.source = "./ressources/img/unfav_icon.png" if self.item.favourite else "./ressources/img/fav_icon.png"
         self.favourite_btn.background_color = (1, 0, 0, 1) if self.item.favourite else (0, 1, 0, 1)
