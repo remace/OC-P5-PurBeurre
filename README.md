@@ -53,7 +53,7 @@ and their dependencies. listed in requirements.txt files
 * configurer mysql
     * create user PurBeurre with password PurBeurre
     * create database PurBeurre
-    * grand all privileges to PurBeure@% on PurBeurre 
+    * grant all privileges to PurBeure@% on PurBeurre 
     
 * importe le MPD in database
     * execute "[pythonpath]/database/off.sql" within mysql command
