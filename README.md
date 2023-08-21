@@ -30,44 +30,43 @@ if the user selects option 1, the program asks those following questions:
 ## documentation
 
 ### dependencies: 
-* Python 3.9
-* Kivy[base]
-* mysql-connector-python
-* requests
+* outside virtuel environment
+    * docker 
+    * docker-compose
 
-and their dependencies. listed in requirements.txt files
+* inside virtual environment
+    * Python 3.9
+    * Kivy[base]
+    * mysql-connector-python
+    * requests
+
+and their dependencies, listed in requirements[OS].txt files
 
 ### setup
 * clone this repo (next, the folder where you cloned the repo will be named [pythonpath])
 
 #### database
-* install Mysql
-    * windows:
-        * Download mysql setup tool
-        * setup at least the server
-    * linux:
-        * use integrated packet manager to install mariadb: apt, snap, flatpack, dnf, rpm...
-    * macOS
-        * find your own way to install mysql server
-    
-* configurer mysql
-    * create user PurBeurre with password PurBeurre
-    * create database PurBeurre
-    * grant all privileges to PurBeure@% on PurBeurre 
-    
-* importe le MPD in database
-    * execute "[pythonpath]/database/off.sql" within mysql command
-    
+
+
+```bash
+# install database
+docker-compose up
+
+# create tables
+docker exec -i oc-p5-purbeurre-db-1 mariadb --user="PurBeurre" --password="PurBeurre" --database="PurBeurre" --host="localhost" < database/PurBeurre.sql
+```
+
+to verify it worked, you can head do http://localhost:8080, and enter PurBeurre as username, PurBeurre as password, and PurBeurre as database, and You should see 3 empty tables named "categories" "food", and "favourites".
+
 #### Setup the app
 * setup the app
     * [pythonpath]/settings.py
-    * you can use custom mysql if configured mysql in another way
     * you can set the size of the data imported from Open Food Facts
 
 #### Virtual environment and dependencies
 * create and activate a virtual environment
     * python3 -m venv env
-    * windows: env\Scripts\activate.bat ?
+    * windows: env\Scripts\activate
     * linux: source ./env/bin/activate
 
 * install dependencies
@@ -75,5 +74,5 @@ and their dependencies. listed in requirements.txt files
     linux: python3 -m pip install -r requirementsLinux.txt
 
 #### Launch the app
-* to launch the App, use "python3 [pythonpath]/Purbeurre.py"
+* to launch the App, use `python3 [pythonpath]/OC_purbeurre.py`
 
